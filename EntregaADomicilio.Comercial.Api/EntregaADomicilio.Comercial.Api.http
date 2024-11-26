@@ -1,0 +1,6 @@
+@EntregaADomicilio.Comercial.Api_HostAddress = http://localhost:5048
+
+GET {{EntregaADomicilio.Comercial.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

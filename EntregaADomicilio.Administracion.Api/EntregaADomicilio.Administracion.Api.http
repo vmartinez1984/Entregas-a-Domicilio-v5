@@ -1,0 +1,6 @@
+@EntregaADomicilio.Administracion.Api_HostAddress = http://localhost:5035
+
+GET {{EntregaADomicilio.Administracion.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
