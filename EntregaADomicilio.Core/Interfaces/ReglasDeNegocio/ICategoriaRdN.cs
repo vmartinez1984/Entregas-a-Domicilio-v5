@@ -4,7 +4,7 @@ namespace EntregaADomicilio.Core.Interfaces.ReglasDeNegocio
 {
     public interface ICategoriaRdN
     {
-        Task ActualizarAsync(string categoriaId, CategoriaDtoIn categoriaDtoIn);
+        Task ActualizarAsync(string categoriaId, CategoriaDtoUpd categoriaDtoIn);
         Task<IdDto> AgregarAsync(CategoriaDtoIn categoria);
         Task BorrarAsync(string categoriaId);
         Task<bool> ExisteAsync(string categoria);

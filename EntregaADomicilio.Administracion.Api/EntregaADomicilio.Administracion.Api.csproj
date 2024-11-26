@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EntregaADomicilio.Core\EntregaADomicilio.Core.csproj" />
+    <ProjectReference Include="..\EntregaADomiclio.Comercial.ReglasDeNegocio\EntregaADomiclio.Comercial.ReglasDeNegocio.csproj" />
   </ItemGroup>
 
 </Project>

@@ -33,7 +33,7 @@ namespace EntregaADomicilio.Administracion.Api.Controllers
             CategoriaDto categoriaDto;
 
             categoriaDto = await _reglasDeNegocio.Categoria.ObtenerPorIdAsync(categoria.EncodedKey);
-            if (categoriaDto == null)
+            if (categoriaDto != null)
                 return Ok(categoriaDto);
 
             IdDto id;
@@ -44,7 +44,7 @@ namespace EntregaADomicilio.Administracion.Api.Controllers
         }
 
         [HttpPut("{categoriaId}")]
-        public async Task<IActionResult> ActualizarAsync(string categoriaId, CategoriaDtoIn categoriaDtoIn)
+        public async Task<IActionResult> ActualizarAsync(string categoriaId, CategoriaDtoUpd categoriaDtoIn)
         {
             CategoriaDto categoria;
 
@@ -53,20 +53,6 @@ namespace EntregaADomicilio.Administracion.Api.Controllers
                 return NotFound();
 
             await _reglasDeNegocio.Categoria.ActualizarAsync(categoriaId, categoriaDtoIn);
-
-            return Accepted();
-        }
-
-        [HttpDelete("{categoriaId}")]
-        public async Task<IActionResult> BorrarAsync(string categoriaId)
-        {
-            CategoriaDto categoria;
-
-            categoria = await _reglasDeNegocio.Categoria.ObtenerPorIdAsync(categoriaId);
-            if (categoria == null)
-                return NotFound();            
-
-            await _reglasDeNegocio.Categoria.BorrarAsync(categoriaId);
 
             return Accepted();
         }
