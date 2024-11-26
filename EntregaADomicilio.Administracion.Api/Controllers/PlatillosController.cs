@@ -12,6 +12,22 @@ namespace EntregaADomicilio.Administracion.Api.Controllers
         {
         }
 
-      
+
+        [HttpPost]
+        public async Task<IActionResult> AgregarPlatilloAsync([FromForm]PlatilloDtoIn platillo)
+        {
+            PlatilloDto platillo1;
+
+            platillo1 = await _reglasDeNegocio.Platillo.ObtenerPorIdAsync(platillo.EncodedKey);
+            if (platillo1 != null)
+                return Ok(platillo1);
+            IdDto idDto;
+
+            idDto = await _reglasDeNegocio.Platillo.AgregarAsync(platillo);
+
+            return Created($"Platillos/{idDto.Id}", idDto);
+        }
+
+
     }
 }

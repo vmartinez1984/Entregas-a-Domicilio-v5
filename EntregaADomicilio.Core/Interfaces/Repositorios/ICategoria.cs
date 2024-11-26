@@ -2,7 +2,7 @@
 
 namespace EntregaADomicilio.Core.Interfaces.Repositorios
 {
-    public interface ICategoria
+    public interface ICategoriaRepositorio
     {
         Task ActualizarAsync(Categoria entidad);
         Task<string> AgregarAsync(Categoria entidad);

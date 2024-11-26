@@ -9,7 +9,8 @@ namespace EntregaADomicilio.Repositorios.Ayudantes
         public static void AgregarRepositorio(this IServiceCollection services)
         {
             services.AddScoped<IRepositorio, Repositorio>();
-            services.AddScoped<ICategoria,CategoriaRepositorio>();
+            services.AddScoped<ICategoriaRepositorio,CategoriaRepositorio>();
+            services.AddScoped<IPlatilloRepositorio, PlatilloRepositorio>();
         }
     }
 }

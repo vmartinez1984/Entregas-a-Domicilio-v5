@@ -2,6 +2,8 @@
 {
     public interface IRepositorio
     {
-        ICategoria Categoria { get; }
+        ICategoriaRepositorio Categoria { get; }
+
+        IPlatilloRepositorio Platillo { get; }
     }
 }

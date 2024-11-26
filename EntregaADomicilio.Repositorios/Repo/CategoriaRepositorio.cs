@@ -6,18 +6,24 @@ using MongoDB.Driver;
 
 namespace EntregaADomicilio.Repositorios.Repo
 {
-    public class CategoriaRepositorio : ICategoria
+    public class CategoriaRepositorio : BaseRepo, ICategoriaRepositorio
     {
         private readonly IMongoCollection<Categoria> _collection;
 
-        public CategoriaRepositorio(IConfiguration configurations)
+        public CategoriaRepositorio(IConfiguration configurations) : base(configurations)
         {
-            var conectionString = configurations.GetConnectionString("MongoDb");
-            var mongoClient = new MongoClient(conectionString);
-            var nombreDeLaDb = conectionString.Split("/").Last().Split("?").First();
-            var mongoDatabase = mongoClient.GetDatabase(nombreDeLaDb);
-            _collection = mongoDatabase.GetCollection<Categoria>("Categorias");
+            _collection = _database.GetCollection<Categoria>("Categorias");
         }
+
+
+        //public CategoriaRepositorio(IConfiguration configurations)
+        //{
+        //    var conectionString = configurations.GetConnectionString("MongoDb");
+        //    var mongoClient = new MongoClient(conectionString);
+        //    var nombreDeLaDb = conectionString.Split("/").Last().Split("?").First();
+        //    var mongoDatabase = mongoClient.GetDatabase(nombreDeLaDb);
+        //    _collection = mongoDatabase.GetCollection<Categoria>("Categorias");
+        //}
 
         public async Task ActualizarAsync(Categoria entidad)
         {
