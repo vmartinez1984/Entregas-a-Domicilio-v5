@@ -7,13 +7,16 @@ namespace EntregaADomicilio.Repositorios.Repo
         public Repositorio(
             ICategoriaRepositorio categoria, 
             IPlatilloRepositorio platilloRepositorio,
-            IPersonaRepositorio personaRepositorio
+            IPersonaRepositorio personaRepositorio,
+            IPedidoRepositorio pedidoRepositorio
         )
         {
             Categoria = categoria;
             Platillo = platilloRepositorio;
             Persona = personaRepositorio;
+            Pedido = pedidoRepositorio;
         }
+        public IPedidoRepositorio Pedido { get; }
 
         public ICategoriaRepositorio Categoria { get; }
 

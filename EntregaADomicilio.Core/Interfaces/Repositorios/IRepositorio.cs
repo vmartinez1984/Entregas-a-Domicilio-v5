@@ -7,5 +7,7 @@
         IPlatilloRepositorio Platillo { get; }
 
         IPersonaRepositorio Persona { get; }
+
+        IPedidoRepositorio Pedido { get; }
     }
 }

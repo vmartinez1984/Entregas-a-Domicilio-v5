@@ -32,7 +32,7 @@ namespace EntregaADomicilio.Pedidos.ReglasDeNegocio
             persona.Direcciones[0].EsLaPrincipal = true;
             id = await _repositorio.Persona.AgregarAsync(persona);
 
-            return new IdDto { EncodedKey = cliente.EncodedKey, Id = id.ToString() };
+            return new IdDto { EncodedKey = cliente.EncodedKey, Id = id };
         }
 
         /// <summary>

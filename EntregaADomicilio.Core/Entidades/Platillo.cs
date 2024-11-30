@@ -28,11 +28,22 @@ namespace EntregaADomicilio.Core.Entidades
 
         public double Precio { get; set; }
 
-
-
-
-
         public Archivo Archivo { get; set; }
+    }
+
+    public class PlatilloDePedido
+    {
+        public string EncodedKey { get; set; }       
+
+        public string Categoria { get; set; }
+
+        public string Nombre { get; set; }
+
+        public string Descripcion { get; set; }
+
+        public double Precio { get; set; }
+
+        public string Nota { get; set; }
     }
 
     public class Archivo

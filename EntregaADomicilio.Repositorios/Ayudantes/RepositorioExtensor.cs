@@ -12,6 +12,7 @@ namespace EntregaADomicilio.Repositorios.Ayudantes
             services.AddScoped<ICategoriaRepositorio,CategoriaRepositorio>();
             services.AddScoped<IPlatilloRepositorio, PlatilloRepositorio>();
             services.AddScoped<IPersonaRepositorio, PersonaRepositorio>();
+            services.AddScoped<IPedidoRepositorio,PedidoRepositorio>();
         }
     }
 }

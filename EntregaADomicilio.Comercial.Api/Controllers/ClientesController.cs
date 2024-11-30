@@ -36,11 +36,10 @@ namespace EntregaADomicilio.Comercial.Api.Controllers
             cliente1 = await _reglasDeNegocio.Cliente.ObtenerClientePorId(cliente.EncodedKey);
             if (cliente1 is not null)
                 return Ok(cliente1);
-            else
-            {
-                cliente1 = await _reglasDeNegocio.Cliente.ObtenerClientePorCorreo(cliente.Correo);
+
+            cliente1 = await _reglasDeNegocio.Cliente.ObtenerClientePorCorreo(cliente.Correo);
+            if (cliente1 is not null)
                 return BadRequest("Correo registrado previamente");
-            }
 
             IdDto idDto;
 

@@ -32,16 +32,11 @@ namespace EntregaADomicilio.Comercial.Api.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Cliente")]
         public async Task<IActionResult> AgregarPedido(PedidoDtoIn pedido)
         {
-            if (string.IsNullOrEmpty(pedido.EncodedKey))
-                pedido.EncodedKey = Guid.NewGuid().ToString();
-            else
-            {
-                PedidoDto pedidoDto;
+            PedidoDto pedidoDto;
 
-                pedidoDto = await _reglasDeNegocio.Pedido.ObtenerPorIdAsync(pedido.EncodedKey);
-                if (pedidoDto is not null)
-                    return Ok(pedidoDto);
-            }
+            pedidoDto = await _reglasDeNegocio.Pedido.ObtenerPorIdAsync(pedido.EncodedKey);
+            if (pedidoDto is not null)
+                return Ok(pedidoDto);
 
             IdDto id;
 
@@ -53,19 +48,17 @@ namespace EntregaADomicilio.Comercial.Api.Controllers
 
         /// <summary>
         /// Obtener pedido por número de pedido
-        /// </summary>
-        /// <param name="pedidoId"></param>
+        /// </summary>        
         /// <returns></returns>
         [HttpGet("{pedidoId}")]
         [ProducesResponseType(typeof(PedidoDto), 200)]
         [Produces("application/json")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Cliente")]
-        //[AllowAnonymous]
-        public async Task<IActionResult> ObtenerPedido(string pedidoId)
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Cliente")]        
+        public async Task<IActionResult> ObtenerUltimoPedidoAsync()
         {
             PedidoDto pedido;
 
-            pedido = await _reglasDeNegocio.Pedido.ObtenerPorIdAsync(pedidoId);
+            pedido = await _reglasDeNegocio.Pedido.ObtenerUltimoPedidoAsync(ObtenerClienteId());
             if (pedido is null)
                 return NotFound();
 
@@ -79,8 +72,8 @@ namespace EntregaADomicilio.Comercial.Api.Controllers
         [HttpGet()]
         [ProducesResponseType(typeof(PedidoDto), 200)]
         [Produces("application/json")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Cliente")]
-        public async Task<IActionResult> ObtenerTodos()
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Cliente")]
+        public async Task<IActionResult> ObtenerTodosAsync()
         {
             List<PedidoDto> pedidos;
             string clienteId;

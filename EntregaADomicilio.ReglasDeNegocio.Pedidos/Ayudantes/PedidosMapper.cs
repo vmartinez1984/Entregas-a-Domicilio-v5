@@ -4,11 +4,11 @@ using EntregaADomicilio.Pedidos.Dtos;
 
 namespace EntregaADomicilio.Pedidos.Ayudantes
 {
-    internal class PedidosMapper: Profile
+    internal class PedidosMapper : Profile
     {
         public PedidosMapper()
         {
-            CreateMap<Categoria,CategoriaDto>();
+            CreateMap<Categoria, CategoriaDto>();
 
             CreateMap<Platillo, PlatilloDto>();
 
@@ -20,6 +20,15 @@ namespace EntregaADomicilio.Pedidos.Ayudantes
             CreateMap<Persona, ClienteDto>();
 
             CreateMap<ClienteDtoUpd, Persona>();
+
+            CreateMap<PlatilloDtoIn, PlatilloDePedido>();
+
+            CreateMap<PlatilloDePedido, PlatilloDtoIn>();
+            CreateMap<PedidoDtoIn, Pedido>();
+
+            CreateMap<Platillo, PlatilloDePedido>();
+
+            CreateMap<Pedido, PedidoDto>();
         }
     }
 }
