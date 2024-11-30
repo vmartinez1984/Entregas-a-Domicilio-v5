@@ -1,4 +1,4 @@
-﻿namespace EntregaADomicilio.Core.Dtos
+﻿namespace EntregaADomicilio.Core.Dtos.Administracion
 {
     public class IdDto
     {

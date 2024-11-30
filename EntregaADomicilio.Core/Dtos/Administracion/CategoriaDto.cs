@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EntregaADomicilio.Core.Dtos
+namespace EntregaADomicilio.Core.Dtos.Administracion
 {
     public class CategoriaDto
     {

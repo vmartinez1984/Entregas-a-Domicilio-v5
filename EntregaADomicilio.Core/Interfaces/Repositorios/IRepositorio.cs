@@ -5,5 +5,7 @@
         ICategoriaRepositorio Categoria { get; }
 
         IPlatilloRepositorio Platillo { get; }
+
+        IPersonaRepositorio Persona { get; }
     }
 }

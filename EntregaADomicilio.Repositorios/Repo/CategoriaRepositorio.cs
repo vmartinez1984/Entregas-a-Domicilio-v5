@@ -53,9 +53,17 @@ namespace EntregaADomicilio.Repositorios.Repo
             return item.Id + 1;
         }
 
-        public Task<bool> ExisteAsync(string categoria)
+        public async Task<bool> ExisteAsync(string categoria)
         {
-            throw new NotImplementedException();
+            long total;
+            int id;
+
+            if (int.TryParse(categoria, out id))
+                total = await _collection.CountAsync(x => x.Id == id);
+            else
+                total = await _collection.CountAsync(x => x.EncodedKey == categoria);
+
+            return total == 0 ? false : true;
         }
 
         public async Task<Categoria> ObtenerPorIdAsync(string categoriaId)

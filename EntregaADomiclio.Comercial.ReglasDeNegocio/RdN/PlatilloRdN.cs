@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using EntregaADomicilio.Core.Dtos;
+using EntregaADomicilio.Core.Dtos.Administracion;
 using EntregaADomicilio.Core.Entidades;
 using EntregaADomicilio.Core.Interfaces.Almacenes;
 using EntregaADomicilio.Core.Interfaces.ReglasDeNegocio;
@@ -16,9 +16,14 @@ namespace EntregaADomiclio.Comercial.ReglasDeNegocio.RdN
             _almacenDeArchivos = almacenDeArchivos;
         }
 
-        public Task ActualizarAsync(string id, PlatilloDtoUpdate platillo)
+        public async Task ActualizarAsync(string id, PlatilloDtoUpdate platillo)
         {
-            throw new NotImplementedException();
+            Platillo entidad;
+
+            entidad = await _repositorio.Platillo.ObtenerPorIdAsync(id);
+            entidad = _mapper.Map(platillo, entidad);
+
+            await _repositorio.Platillo.ActualizarAsync(entidad);
         }
 
         public async Task<IdDto> AgregarAsync(PlatilloDtoIn platillo)
@@ -29,7 +34,7 @@ namespace EntregaADomiclio.Comercial.ReglasDeNegocio.RdN
             entidad = _mapper.Map<Platillo>(platillo);
             if (platillo.FormFile != null)
                 entidad.Archivo = await GuardarEnAlmacenAsync(platillo);
-            id = await _repositorio.Platillo.AgregarAsync(platillo);
+            id = await _repositorio.Platillo.AgregarAsync(entidad);
 
             return new IdDto { EncodedKey = entidad.EncodedKey, Id = id.ToString() };
         }
@@ -38,11 +43,19 @@ namespace EntregaADomiclio.Comercial.ReglasDeNegocio.RdN
         {
             string aliasDelArchivo;
             string respuesta;
+            Archivo archivo;
 
             aliasDelArchivo = $"{platillo.EncodedKey}{Path.GetExtension(platillo.FormFile.FileName)}";
             respuesta = await _almacenDeArchivos.Guardar("Platillos", aliasDelArchivo, platillo.FormFile);
+            archivo = new Archivo
+            {
+                AliasDelArchivo= aliasDelArchivo,
+                ContentType = platillo.FormFile.ContentType,
+                NombreDelArchivo = platillo.FormFile.FileName,
+                RutaDelArchivo = respuesta
+            };
 
-            throw new NotImplementedException();
+            return archivo;
         }
 
         public Task<byte[]> ObtenerImagenPorIdAsync(string platilloId)
@@ -50,9 +63,15 @@ namespace EntregaADomiclio.Comercial.ReglasDeNegocio.RdN
             throw new NotImplementedException();
         }
 
-        public Task<List<CategoriaDto>> ObtenerPorCategoriaIdAsync(string categoriaId)
+        public async Task<List<PlatilloDto>> ObtenerPorCategoriaIdAsync(string categoria)
         {
-            throw new NotImplementedException();
+            List<PlatilloDto> dtos;
+            List<Platillo> entidadades;
+            
+            entidadades = await _repositorio.Platillo.ObtenerTodosPorCategoriaIdAsync(categoria);
+            dtos = _mapper.Map<List<PlatilloDto>>(entidadades);
+
+            return dtos;
         }
 
         public async Task<PlatilloDto> ObtenerPorIdAsync(string platilloId)
@@ -66,9 +85,15 @@ namespace EntregaADomiclio.Comercial.ReglasDeNegocio.RdN
             return dto;
         }
 
-        public Task<List<CategoriaDto>> ObtenerTodosAsync()
+        public async Task<List<PlatilloDto>> ObtenerTodosAsync()
         {
-            throw new NotImplementedException();
+            List<PlatilloDto> dtos;
+            List<Platillo> entidadades;
+
+            entidadades = await _repositorio.Platillo.ObtenerTodosAsync();
+            dtos = _mapper.Map<List<PlatilloDto>>(entidadades);
+
+            return dtos;
         }
     }
 }

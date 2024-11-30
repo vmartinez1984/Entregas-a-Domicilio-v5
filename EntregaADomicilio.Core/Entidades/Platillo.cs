@@ -11,6 +11,11 @@ namespace EntregaADomicilio.Core.Entidades
 
         public int Id { get; set; }
 
+        public string EncodedKey { get; set; }
+
+        public bool EstaActivo { get; set; } = true;
+
+        public DateTime FechaDeRegistro { get; set; } = DateTime.Now;
 
         public string Categoria { get; set; }
 
@@ -24,11 +29,8 @@ namespace EntregaADomicilio.Core.Entidades
         public double Precio { get; set; }
 
 
-        public bool EstaActivo { get; set; } = true;
 
-        public DateTime FechaDeRegistro { get; set; } = DateTime.Now;
 
-        public string EncodedKey { get; set; }
 
         public Archivo Archivo { get; set; }
     }
@@ -43,6 +45,6 @@ namespace EntregaADomicilio.Core.Entidades
               
         public string AliasDelArchivo { get; set; }
 
-        public DateTime FechaDeRegistro { get; set; }
+        public DateTime FechaDeRegistro { get; set; } = DateTime.Now;
     }
 }

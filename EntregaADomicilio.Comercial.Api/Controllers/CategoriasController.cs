@@ -1,14 +1,21 @@
-﻿using EntregaADomicilio.Core.Dtos;
-using EntregaADomicilio.Core.Interfaces.ReglasDeNegocio;
+﻿using EntregaADomicilio.Pedidos.Dtos;
+using EntregaADomicilio.Pedidos.ReglasDeNegocio;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EntregaADomicilio.Comercial.Api.Controllers
 {
+    /// <summary>
+    /// Controlador de categorias
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriasController : BaseController
     {
-        public CategoriasController(IReglasDeNegocio repositorio) : base(repositorio)
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="repositorio"></param>
+        public CategoriasController(PedidoUoW repositorio) : base(repositorio)
         {
         }
 

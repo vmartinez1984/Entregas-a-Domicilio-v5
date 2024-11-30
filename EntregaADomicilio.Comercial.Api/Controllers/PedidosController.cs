@@ -1,15 +1,23 @@
-﻿using EntregaADomicilio.Core.Dtos;
-using EntregaADomicilio.Core.Interfaces.ReglasDeNegocio;
+﻿using EntregaADomicilio.Pedidos.Dtos;
+using EntregaADomicilio.Pedidos.ReglasDeNegocio;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EntregaADomicilio.Comercial.Api.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class PedidosController : BaseController
     {
-        public PedidosController(IReglasDeNegocio repositorio) : base(repositorio)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="repositorio"></param>
+        public PedidosController(PedidoUoW repositorio) : base(repositorio)
         {
         }
 
@@ -21,22 +29,27 @@ namespace EntregaADomicilio.Comercial.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(IdDto), 202)]
         [Produces("application/json")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Cliente")]
-        //[AllowAnonymous]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Cliente")]
         public async Task<IActionResult> AgregarPedido(PedidoDtoIn pedido)
         {
-            PedidoDto pedidoDto;
+            if (string.IsNullOrEmpty(pedido.EncodedKey))
+                pedido.EncodedKey = Guid.NewGuid().ToString();
+            else
+            {
+                PedidoDto pedidoDto;
 
-            pedidoDto = await _reglasDeNegocio.Pedido.ObtenerPorIdAsync(pedido.EncodedKey);
-            if (pedidoDto is not null)
-                return Ok(pedidoDto);
+                pedidoDto = await _reglasDeNegocio.Pedido.ObtenerPorIdAsync(pedido.EncodedKey);
+                if (pedidoDto is not null)
+                    return Ok(pedidoDto);
+            }
+
             IdDto id;
 
             string clienteId = ObtenerClienteId();
             id = await _reglasDeNegocio.Pedido.AgregarAsync(clienteId, pedido);
 
             return Created($"Pedidos/{id.Id}", id);
-        }        
+        }
 
         /// <summary>
         /// Obtener pedido por número de pedido

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using EntregaADomicilio.Core.Dtos;
+using EntregaADomicilio.Core.Dtos.Administracion;
 using EntregaADomicilio.Core.Entidades;
 using EntregaADomicilio.Core.Interfaces.ReglasDeNegocio;
 using EntregaADomicilio.Core.Interfaces.Repositorios;

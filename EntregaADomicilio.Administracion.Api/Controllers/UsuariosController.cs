@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace EntregaADomicilio.Administracion.Api.Controllers
 {
@@ -7,5 +6,10 @@ namespace EntregaADomicilio.Administracion.Api.Controllers
     [ApiController]
     public class UsuariosController : ControllerBase
     {
+        [HttpPost]
+        public  Task<IActionResult> AgregarUsuario()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

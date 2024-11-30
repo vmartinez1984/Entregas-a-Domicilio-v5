@@ -1,13 +1,23 @@
-﻿using EntregaADomicilio.Core.Interfaces.ReglasDeNegocio;
+﻿using EntregaADomicilio.Pedidos.ReglasDeNegocio;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EntregaADomicilio.Comercial.Api.Controllers
 {    
+    /// <summary>
+    /// Base que inyecta el repositorio
+    /// </summary>
     public class BaseController : ControllerBase
     {
-        public readonly IReglasDeNegocio _reglasDeNegocio;
+        /// <summary>
+        /// Reglas de negocio
+        /// </summary>
+        public readonly PedidoUoW _reglasDeNegocio;
 
-        public BaseController(IReglasDeNegocio repositorio)
+        /// <summary>
+        /// Base
+        /// </summary>
+        /// <param name="repositorio"></param>
+        public BaseController(PedidoUoW repositorio)
         {
             _reglasDeNegocio = repositorio;
         }

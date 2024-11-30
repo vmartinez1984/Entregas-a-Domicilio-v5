@@ -1,4 +1,4 @@
-﻿using EntregaADomicilio.Core.Dtos;
+﻿using EntregaADomicilio.Core.Dtos.Administracion;
 using EntregaADomicilio.Core.Interfaces.ReglasDeNegocio;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,9 +12,19 @@ namespace EntregaADomicilio.Administracion.Api.Controllers
         {
         }
 
+        /// <summary>
+        /// Obtener la lista de categorias
+        /// </summary>
+        /// <response code="200">List<CategoriaDto>></response>
         [HttpGet]
         public async Task<IActionResult> ObtenerTodos() => Ok(await _reglasDeNegocio.Categoria.ObtenerTodosAsync());
 
+        /// <summary>
+        /// Obtener categoria por id
+        /// </summary>
+        /// <param name="categoriaId"></param>
+        /// <response code="404">No encontrado</response>
+        /// <response code="200">CategoriaDto</response>
         [HttpGet("{categoriaId}")]
         public async Task<IActionResult> ObtenerPorId(string categoriaId)
         {

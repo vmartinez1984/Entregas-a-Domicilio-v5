@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
-namespace EntregaADomicilio.Core.Dtos
+namespace EntregaADomicilio.Core.Dtos.Administracion
 {
     public class PlatilloDto
     {
@@ -33,7 +33,7 @@ namespace EntregaADomicilio.Core.Dtos
         [Required]
         public decimal Precio { get; set; }
 
-        [Required]
+        //[Required]
         public IFormFile FormFile { get; set; }
 
         [Required]
@@ -51,7 +51,7 @@ namespace EntregaADomicilio.Core.Dtos
 
         [Required]
         public decimal Precio { get; set; }
-                
+
         public IFormFile FormFile { get; set; }
 
         [Required]

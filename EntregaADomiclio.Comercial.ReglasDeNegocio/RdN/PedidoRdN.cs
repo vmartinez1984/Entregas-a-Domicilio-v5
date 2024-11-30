@@ -1,4 +1,4 @@
-﻿using EntregaADomicilio.Core.Dtos;
+﻿using EntregaADomicilio.Core.Dtos.Administracion;
 using EntregaADomicilio.Core.Interfaces.ReglasDeNegocio;
 
 namespace EntregaADomiclio.Comercial.ReglasDeNegocio.RdN
