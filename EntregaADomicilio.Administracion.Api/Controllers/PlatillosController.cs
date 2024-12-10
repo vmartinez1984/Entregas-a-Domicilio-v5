@@ -1,5 +1,5 @@
 ﻿using EntregaADomicilio.Core.Dtos.Administracion;
-using EntregaADomicilio.Core.Interfaces.ReglasDeNegocio;
+using EntregaADomiclio.Administracion.ReglasDeNegocio;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EntregaADomicilio.Administracion.Api.Controllers
@@ -8,7 +8,7 @@ namespace EntregaADomicilio.Administracion.Api.Controllers
     [ApiController]
     public class PlatillosController : BaseEADController
     {
-        public PlatillosController(IReglasDeNegocio repositorio) : base(repositorio)
+        public PlatillosController(UnitOfWork repositorio) : base(repositorio)
         {
         }
 

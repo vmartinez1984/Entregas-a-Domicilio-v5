@@ -1,7 +1,14 @@
-﻿namespace EntregaADomicilio.Core.Entidades
+﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+
+namespace EntregaADomicilio.Core.Entidades
 {
     public class Pedido
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string _id { get; set; }
+
         public int Id { get; set; }
 
         public string EncodedKey { get; set; }
@@ -16,7 +23,9 @@
 
         public Persona Cliente { get; set; }
 
+        public string RepartidorId { get; set; }
 
         public DateTime FechaDeRegistro { get; set; } = DateTime.Now;
+        public DateTime FechaDeActualizacion { get; set; } = DateTime.Now;
     }
 }

@@ -47,10 +47,10 @@ namespace EntregaADomicilio.Comercial.Api.Controllers
         }
 
         /// <summary>
-        /// Obtener pedido por número de pedido
+        /// Obtener el último pedido
         /// </summary>        
         /// <returns></returns>
-        [HttpGet("{pedidoId}")]
+        [HttpGet("Ultimo")]
         [ProducesResponseType(typeof(PedidoDto), 200)]
         [Produces("application/json")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Cliente")]        

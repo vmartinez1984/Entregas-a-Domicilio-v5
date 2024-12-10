@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using EntregaADomicilio.Core.Dtos.Pedidos;
+using EntregaADomicilio.Core.Dtos.Administracion;
 using EntregaADomicilio.Core.Entidades;
 
-namespace EntregaADomiclio.Comercial.ReglasDeNegocio.Ayudantes
+namespace EntregaADomiclio.Administracion.Ayudantes
 {
     internal class PedidosMapper: Profile
     {

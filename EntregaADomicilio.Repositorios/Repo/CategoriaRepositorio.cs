@@ -13,22 +13,10 @@ namespace EntregaADomicilio.Repositorios.Repo
         public CategoriaRepositorio(IConfiguration configurations) : base(configurations)
         {
             _collection = _database.GetCollection<Categoria>("Categorias");
-        }
+        }       
 
+        public async Task ActualizarAsync(Categoria entidad) => await _collection.ReplaceOneAsync(x => x.Id == entidad.Id, entidad);
 
-        //public CategoriaRepositorio(IConfiguration configurations)
-        //{
-        //    var conectionString = configurations.GetConnectionString("MongoDb");
-        //    var mongoClient = new MongoClient(conectionString);
-        //    var nombreDeLaDb = conectionString.Split("/").Last().Split("?").First();
-        //    var mongoDatabase = mongoClient.GetDatabase(nombreDeLaDb);
-        //    _collection = mongoDatabase.GetCollection<Categoria>("Categorias");
-        //}
-
-        public async Task ActualizarAsync(Categoria entidad)
-        {
-            await _collection.ReplaceOneAsync(x => x.Id == entidad.Id, entidad);
-        }
 
         public async Task<string> AgregarAsync(Categoria item)
         {

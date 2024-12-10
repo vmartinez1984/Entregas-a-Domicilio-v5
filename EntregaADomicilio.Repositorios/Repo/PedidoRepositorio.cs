@@ -6,20 +6,16 @@ using MongoDB.Driver;
 
 namespace EntregaADomicilio.Repositorios.Repo
 {
-    public class PedidoRepositorio : IPedidoRepositorio
+    public class PedidoRepositorio : BaseRepo, IPedidoRepositorio
     {
         private readonly IMongoCollection<Pedido> _collection;
 
-        public PedidoRepositorio(IConfiguration configurations)
+        public PedidoRepositorio(IConfiguration configurations) : base(configurations)
         {
-            var conectionString = configurations.GetConnectionString("MongoDb");
-            var mongoClient = new MongoClient(conectionString);
-            var nombreDeLaDb = conectionString?.Split("/").Last().Split("?").First();
-            var mongoDatabase = mongoClient.GetDatabase(nombreDeLaDb);
-            _collection = mongoDatabase.GetCollection<Pedido>("Pedidos");
+            _collection = _database.GetCollection<Pedido>("Pedidos");
         }
 
-        public async Task ActualizarAsync(Pedido entidad) => await _collection.ReplaceOneAsync(x => x.Id == entidad.Id, entidad);
+        public async Task ActualizarAsync(Pedido entidad) => await _collection.ReplaceOneAsync(x => x.EncodedKey == entidad.EncodedKey || x.Id == entidad.Id, entidad);
 
         public async Task<int> AgregarAsync(Pedido item)
         {
@@ -44,6 +40,9 @@ namespace EntregaADomicilio.Repositorios.Repo
             return item.Id + 1;
         }
 
+        public async Task<Pedido> ObtenerPedidoPreparadoAsync(string repartidorId) =>
+            await _collection.Find(x => x.Estado == "Preparado").FirstOrDefaultAsync();
+
         public async Task<Pedido> ObtenerPorIdAsync(string platilloId)
         {
             Pedido entidad;
@@ -57,8 +56,40 @@ namespace EntregaADomicilio.Repositorios.Repo
             return entidad;
         }
 
-        public async Task<List<Pedido>> ObtenerTodosAsync() => (await _collection.FindAsync(_ => true)).ToList();
-       
+        public async Task<List<Pedido>> ObtenerTodosAsync() => await _collection.Find(_ => true).ToListAsync();
 
+        public async Task<List<Pedido>> ObtenerTodosPorClienteIdAsync(string clienteId)
+        {
+            List<Pedido> pedidos;
+
+            int id = 0;
+            if (int.TryParse(clienteId, out id))
+                pedidos = await _collection.Find(x => x.Cliente.Id == id)
+                    .SortByDescending(x => x.FechaDeRegistro)
+                    .ToListAsync();
+            else
+                pedidos = await _collection.Find(x => x.Cliente.EncodedKey == clienteId)
+                    .SortByDescending(x => x.FechaDeRegistro)
+                    .ToListAsync();
+
+            return pedidos;
+        }
+
+        public async Task<Pedido> ObtenerUltimoPedidoAsync(string clienteId)
+        {
+            Pedido entidad;
+
+            int id = 0;
+            if (int.TryParse(clienteId, out id))
+                entidad = await _collection.Find(x => x.Cliente.Id == id)
+                    .SortByDescending(x => x.FechaDeRegistro)
+                    .FirstOrDefaultAsync();
+            else
+                entidad = await _collection.Find(x => x.Cliente.EncodedKey == clienteId)
+                    .SortByDescending(x => x.FechaDeRegistro)
+                    .FirstOrDefaultAsync();
+
+            return entidad;
+        }
     }//end class   
 }

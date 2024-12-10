@@ -1,5 +1,5 @@
 ﻿using EntregaADomicilio.Core.Dtos.Administracion;
-using EntregaADomicilio.Core.Interfaces.ReglasDeNegocio;
+using EntregaADomiclio.Administracion.ReglasDeNegocio;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EntregaADomicilio.Administracion.Api.Controllers
@@ -8,7 +8,7 @@ namespace EntregaADomicilio.Administracion.Api.Controllers
     [ApiController]
     public class CategoriasController : BaseEADController
     {
-        public CategoriasController(IReglasDeNegocio repositorio) : base(repositorio)
+        public CategoriasController(UnitOfWork repositorio) : base(repositorio)
         {
         }
 

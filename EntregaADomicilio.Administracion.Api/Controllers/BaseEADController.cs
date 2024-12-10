@@ -1,13 +1,13 @@
-﻿using EntregaADomicilio.Core.Interfaces.ReglasDeNegocio;
+﻿using EntregaADomiclio.Administracion.ReglasDeNegocio;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EntregaADomicilio.Administracion.Api.Controllers
 {
     public class BaseEADController : ControllerBase
     {
-        public readonly IReglasDeNegocio _reglasDeNegocio;
+        public readonly UnitOfWork _reglasDeNegocio;
 
-        public BaseEADController(IReglasDeNegocio repositorio)
+        public BaseEADController(UnitOfWork repositorio)
         {
             _reglasDeNegocio = repositorio;
         }

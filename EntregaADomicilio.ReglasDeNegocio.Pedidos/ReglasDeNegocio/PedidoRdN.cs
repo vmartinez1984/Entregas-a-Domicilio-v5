@@ -55,19 +55,22 @@ namespace EntregaADomicilio.Pedidos.ReglasDeNegocio
             return _mapper.Map<PedidoDto>(pedido);
         }
 
-        public Task<PedidoDto> ObtenerPorIdAsync(object encodedKey)
+        public async Task<List<PedidoDto>> ObtenerTodosPorClienteIdAsync(string clienteId)
         {
-            throw new NotImplementedException();
+            List<Pedido> pedidos;
+
+            pedidos = await _repositorio.Pedido.ObtenerTodosPorClienteIdAsync(clienteId);
+
+            return _mapper.Map<List<PedidoDto>>(pedidos);
         }
 
-        public Task<List<PedidoDto>> ObtenerTodosPorClienteIdAsync(string clienteId)
+        public async Task<PedidoDto> ObtenerUltimoPedidoAsync(string clienteId)
         {
-            throw new NotImplementedException();
-        }
+            Pedido pedido;
 
-        public async Task<PedidoDto> ObtenerUltimoPedidoAsync(string v)
-        {
-            throw new NotImplementedException();
+            pedido = await _repositorio.Pedido.ObtenerUltimoPedidoAsync(clienteId);
+
+            return _mapper.Map<PedidoDto>(pedido);
         }
     }
 }

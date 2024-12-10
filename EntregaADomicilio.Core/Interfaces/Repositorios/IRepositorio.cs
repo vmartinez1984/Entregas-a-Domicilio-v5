@@ -9,5 +9,7 @@
         IPersonaRepositorio Persona { get; }
 
         IPedidoRepositorio Pedido { get; }
+        
+        IUbicacionRepositorio Ubicacion { get; }
     }
 }

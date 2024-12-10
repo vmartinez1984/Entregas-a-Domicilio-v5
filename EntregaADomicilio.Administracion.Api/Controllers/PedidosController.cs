@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace EntregaADomicilio.Administracion.Api.Controllers
+namespace EntregaADomiclio.Administracion.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

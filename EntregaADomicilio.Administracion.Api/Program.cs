@@ -1,9 +1,9 @@
-using EntregaADomiclio.Comercial.ReglasDeNegocio.Ayudantes;
+using EntregaADomiclio.Administracion.Ayudantes;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AgregarReglasDeNegocios();
+builder.Services.AgregarReglasDeNegocios(builder.Configuration);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
