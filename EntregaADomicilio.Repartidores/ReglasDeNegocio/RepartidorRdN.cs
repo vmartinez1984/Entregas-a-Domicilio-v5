@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EntregaADomicilio.Core.Constantes;
 using EntregaADomicilio.Core.Entidades;
 using EntregaADomicilio.Core.Interfaces.Repositorios;
 using EntregaADomicilio.Repartidores.Dtos;
@@ -6,7 +7,7 @@ using JwtTokenServicio.Servicios;
 
 namespace EntregaADomicilio.Repartidores.ReglasDeNegocio
 {
-    public class RepartidorRdN: BaseRdN
+    public class RepartidorRdN : BaseRdN
     {
         private readonly JwtToken _jwtToken;
 
@@ -25,7 +26,8 @@ namespace EntregaADomicilio.Repartidores.ReglasDeNegocio
 
             pedido = await _repositorio.Pedido.ObtenerPorIdAsync(pedidoId);
             pedido.RepartidorId = repartidorID;
-            pedido.Estado = "En camino";
+            pedido.Estado = EstadoDelPedido.EnCamino;
+            pedido.Estados.Add(EstadoDelPedido.EnCamino, DateTime.Now);
             pedido.FechaDeActualizacion = DateTime.Now;
 
             await _repositorio.Pedido.ActualizarAsync(pedido);
@@ -44,20 +46,20 @@ namespace EntregaADomicilio.Repartidores.ReglasDeNegocio
                 return null;
         }
 
-        public async Task<PedidoDto> ObtenerAsync(string repartidorId)
+        public async Task<List<PedidoDto>> ObtenerAsync(string repartidorId)
         {
-            Pedido pedido;
+            List<Pedido> pedido;
 
-            pedido = await _repositorio.Pedido.ObtenerPedidoPreparadoAsync(repartidorId);
+            pedido = await _repositorio.Pedido.ObtenerPedidosPreparadoAsync();
 
-            return _mapper.Map<PedidoDto>(pedido);
+            return _mapper.Map<List<PedidoDto>>(pedido);
         }
 
         public async Task PedidoEntregadoAsync(string pedidoId)
         {
             Pedido pedido;
 
-            pedido = await _repositorio.Pedido.ObtenerPorIdAsync(pedidoId);            
+            pedido = await _repositorio.Pedido.ObtenerPorIdAsync(pedidoId);
             pedido.Estado = "Entregado";
             pedido.FechaDeActualizacion = DateTime.Now;
 

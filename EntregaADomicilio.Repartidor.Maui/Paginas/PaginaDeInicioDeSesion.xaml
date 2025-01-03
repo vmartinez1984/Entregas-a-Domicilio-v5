@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EntregaADomicilio.Repartidor.Maui.Paginas.PaginaDeInicioDeSesion"
+             Title="Inicio de sesión">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+    <StackLayout VerticalOptions="Center" Grid.Column="1">
+        <Label Text="Correo"/>
+        <Entry Placeholder="Correo" x:Name="EntryCorreo"/>
+
+        <Label Text="Contraseña"/>
+        <Entry Placeholder="Contraseña" x:Name="EntryContrasenia"/>
+
+        <Button Text="Iniciar sesión" x:Name="ButtonInicioDeSesion" Clicked="ButtonInicioDeSesion_Clicked"/>
+
+        <ActivityIndicator x:Name="ActivityIndicator" IsRunning="True" IsVisible="False" Color="BlueViolet"/>
+        
+    </StackLayout>
+    </Grid>
+</ContentPage>

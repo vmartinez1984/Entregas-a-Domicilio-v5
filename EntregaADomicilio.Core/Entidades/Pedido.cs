@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
+using EntregaADomicilio.Core.Constantes;
 
 namespace EntregaADomicilio.Core.Entidades
 {
@@ -19,13 +20,16 @@ namespace EntregaADomicilio.Core.Entidades
 
         public string Nota { get; set; }
 
-        public string Estado { get; set; } = "Registrado";
+        public string Estado { get; set; } = EstadoDelPedido.Registrado;
+
+        public Dictionary<string,DateTime> Estados { get; set; } = new Dictionary<string, DateTime>();
 
         public Persona Cliente { get; set; }
 
         public string RepartidorId { get; set; }
 
         public DateTime FechaDeRegistro { get; set; } = DateTime.Now;
+
         public DateTime FechaDeActualizacion { get; set; } = DateTime.Now;
     }
 }

@@ -1,4 +1,5 @@
-﻿using EntregaADomicilio.Core.Entidades;
+﻿using EntregaADomicilio.Core.Constantes;
+using EntregaADomicilio.Core.Entidades;
 using EntregaADomicilio.Core.Interfaces.Repositorios;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
@@ -40,18 +41,18 @@ namespace EntregaADomicilio.Repositorios.Repo
             return item.Id + 1;
         }
 
-        public async Task<Pedido> ObtenerPedidoPreparadoAsync(string repartidorId) =>
-            await _collection.Find(x => x.Estado == "Preparado").FirstOrDefaultAsync();
+        public async Task<List<Pedido>> ObtenerPedidosPreparadoAsync() =>
+            await _collection.Find(x => x.Estado == EstadoDelPedido.Preparado).ToListAsync();
 
-        public async Task<Pedido> ObtenerPorIdAsync(string platilloId)
+        public async Task<Pedido> ObtenerPorIdAsync(string pedidoId)
         {
             Pedido entidad;
 
             int id = 0;
-            if (int.TryParse(platilloId, out id))
+            if (int.TryParse(pedidoId, out id))
                 entidad = (await _collection.FindAsync(x => x.Id == id)).FirstOrDefault();
             else
-                entidad = (await _collection.FindAsync(x => x.EncodedKey == platilloId)).FirstOrDefault();
+                entidad = (await _collection.FindAsync(x => x.EncodedKey == pedidoId)).FirstOrDefault();
 
             return entidad;
         }

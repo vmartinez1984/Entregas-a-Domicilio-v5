@@ -29,7 +29,7 @@ namespace EntregaADomicilio.Repartidor.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> ObtenerAsync()
         {
-            PedidoDto pedido;            
+            List<PedidoDto> pedido;            
 
             pedido = await _reglasDeNegocio.Repartidor.ObtenerAsync(ObtenerId());
 
