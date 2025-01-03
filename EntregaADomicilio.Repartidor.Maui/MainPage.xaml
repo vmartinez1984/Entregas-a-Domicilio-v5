@@ -7,13 +7,16 @@
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
+            <ActivityIndicator x:Name="ActivityIndicator" IsRunning="True" IsVisible="False"/>
             <ListView x:Name="ListView">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
-                                
-                            </Grid>
+                            <StackLayout>
+                                <Label Text="{Binding Cliente.NombreCompleto}"/>
+                                <Label Text="{Binding Cliente.Direccion.CalleYNumero}"/>
+                                <Label Text="{Binding Cliente.Direccion.Colonia}"/>
+                            </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

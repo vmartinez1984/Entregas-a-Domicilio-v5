@@ -1,4 +1,5 @@
-﻿using EntregaADomicilio.Repartidores.Dtos;
+﻿using EntregaADomicilio.Core.Repartidores.Dtos;
+using EntregaADomicilio.Repartidores.Dtos;
 using EntregaADomicilio.Repartidores.ReglasDeNegocio;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;

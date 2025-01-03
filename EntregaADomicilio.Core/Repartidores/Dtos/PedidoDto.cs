@@ -14,6 +14,8 @@
 
         public string Estado { get; set; }
 
+        public ClienteDto Cliente { get; set; }
+
         public DateTime FechaDeRegistro { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace EntregaADomicilio.Repartidor.Maui
                 });
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
             builder.Services.AddHttpClient("").ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
             {
@@ -28,6 +28,7 @@ namespace EntregaADomicilio.Repartidor.Maui
             builder.Services.AddSingleton<Servicio>();
             builder.Services.AddSingleton<ServicioDeConfiguracion>();
             builder.Services.AddSingleton<ServicioDeInicioDeSesion>();
+            builder.Services.AddSingleton<ServicioDePedido>();
 
             builder.Services.AddSingleton<PaginaDeInicioDeSesion>();
             builder.Services.AddSingleton<MainPage>();

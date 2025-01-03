@@ -2,6 +2,7 @@
 using EntregaADomicilio.Core.Constantes;
 using EntregaADomicilio.Core.Entidades;
 using EntregaADomicilio.Core.Interfaces.Repositorios;
+using EntregaADomicilio.Core.Repartidores.Dtos;
 using EntregaADomicilio.Repartidores.Dtos;
 using JwtTokenServicio.Servicios;
 
