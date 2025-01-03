@@ -12,41 +12,33 @@ namespace EntregaADomicilio.Repartidor.Maui.Servicios
         public ServicioDeInicioDeSesion(IHttpClientFactory httpClientFactory, ServicioDeConfiguracion configuracionServicio)
         {
             _httpClientFactory = httpClientFactory;
-            _url = configuracionServicio.ObtenerBaseUrl()+ "Repartidores/";
+            _url = configuracionServicio.ObtenerBaseUrl() + "Repartidores/";
         }
 
-        public async Task<string> IniciarSesionAsync(string correo, string contraseña)
+        public async Task<TokenDto> IniciarSesionAsync(string correo, string contraseña)
         {
-            try
+            using (var client = _httpClientFactory.CreateClient())
             {
-                using (var client = _httpClientFactory.CreateClient())
+                var request = new HttpRequestMessage(HttpMethod.Post, _url + "IniciarSesiones");
+                var inicioDeSesion = new InicioDeSesionDto { Correo = correo, Contrasenia = contraseña };
+                var body = JsonConvert.SerializeObject(inicioDeSesion);
+                var content = new StringContent(body, null, "application/json");
+                request.Content = content;
+                var response = await client.SendAsync(request);
+                var data = await response.Content.ReadAsStringAsync();
+                if (response.IsSuccessStatusCode)
                 {
-                    var request = new HttpRequestMessage(HttpMethod.Post, _url + "IniciarSesiones");
-                    var inicioDeSesion = new InicioDeSesionDto { Correo = correo, Contrasenia = contraseña };
-                    var body = JsonConvert.SerializeObject(inicioDeSesion);
-                    var content = new StringContent(body, null, "application/json");
-                    request.Content = content;
-                    var response = await client.SendAsync(request);
-                    var data = await response.Content.ReadAsStringAsync();
-                    if (response.IsSuccessStatusCode)
-                    {
-                        TokenDto id;
+                    TokenDto id;
 
-                        id = JsonConvert.DeserializeObject<TokenDto>(data);
-                        if (id == null)
-                            return null;
-
-                        return id.Token;
-                    }
-                    else
-                        //throw new Exception(await response.Content.ReadAsStringAsync());
+                    id = JsonConvert.DeserializeObject<TokenDto>(data);
+                    if (id == null)
                         return null;
+
+                    return id;
                 }
-            }
-            catch (Exception ex)
-            {
-                return null;
-                //throw;
+                else
+                    //throw new Exception(await response.Content.ReadAsStringAsync());
+                    return null;
             }
         }
     }

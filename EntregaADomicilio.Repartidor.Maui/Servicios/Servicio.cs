@@ -3,12 +3,15 @@
     public class Servicio
     {
         public ServicioDeInicioDeSesion InicioDeSesion { get; }
+        public ServicioDeConfiguracion Configuracion { get; }
 
         public Servicio(
-            ServicioDeInicioDeSesion servicioDeInicioDeSesion
+            ServicioDeInicioDeSesion servicioDeInicioDeSesion,
+            ServicioDeConfiguracion servicioDeConfiguracion
         )
         {
-            InicioDeSesion = servicioDeInicioDeSesion;    
+            InicioDeSesion = servicioDeInicioDeSesion;
+            Configuracion = servicioDeConfiguracion;
         }
     }
 }

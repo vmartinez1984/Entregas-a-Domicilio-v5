@@ -9,17 +9,18 @@
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-    <StackLayout VerticalOptions="Center" Grid.Column="1">
-        <Label Text="Correo"/>
-        <Entry Placeholder="Correo" x:Name="EntryCorreo"/>
+        <StackLayout VerticalOptions="Center" Grid.Column="1">
+            <Label Text="Correo"/>
+            <Entry Placeholder="Correo" x:Name="EntryCorreo"/>
 
-        <Label Text="Contraseña"/>
-        <Entry Placeholder="Contraseña" x:Name="EntryContrasenia"/>
+            <Label Text="Contraseña"/>
+            <Entry Placeholder="Contraseña" x:Name="EntryContrasenia"/>
 
-        <Button Text="Iniciar sesión" x:Name="ButtonInicioDeSesion" Clicked="ButtonInicioDeSesion_Clicked"/>
+            <Button Text="Iniciar sesión" x:Name="ButtonInicioDeSesion" Clicked="ButtonInicioDeSesion_Clicked"/>
 
-        <ActivityIndicator x:Name="ActivityIndicator" IsRunning="True" IsVisible="False" Color="BlueViolet"/>
-        
-    </StackLayout>
+            <ActivityIndicator x:Name="ActivityIndicator" IsRunning="True" IsVisible="False" Color="BlueViolet"/>
+            <Label x:Name="LabelMensaje"/>
+            
+        </StackLayout>
     </Grid>
 </ContentPage>

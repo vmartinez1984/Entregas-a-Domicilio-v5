@@ -1,3 +1,4 @@
+using EntregaADomicilio.Core.Repartidores.Dtos;
 using EntregaADomicilio.Repartidor.Maui.Servicios;
 
 namespace EntregaADomicilio.Repartidor.Maui.Paginas;
@@ -29,18 +30,36 @@ public partial class PaginaDeInicioDeSesion : ContentPage
         HabilitarFormulario(true);
     }
 
+    /// <summary>
+    /// Verificación básica que no este vacio
+    /// </summary>
+    /// <param name="correo"></param>
+    /// <param name="contraseña"></param>
+    /// <returns></returns>
     private bool SonValidosLasCredenciales(string correo, string contraseña)
     {
+        if (string.IsNullOrEmpty(correo))
+        {
+            LabelMensaje.Text = "El correo es obligatorio";
+            return false;
+        }
+        if (string.IsNullOrEmpty(contraseña))
+        {
+            LabelMensaje.Text = "La contraseña es obligatoria";
+            return false;
+        }
         return true;
     }
 
     private async Task<bool> SonValidasLasCredencialesAsync(string correo, string contrasenia)
     {
-        string token;
+        TokenDto token;
 
-        token = await _servicio.InicioDeSesion.IniciarSesionAsync(correo, contrasenia);
+        token = await _servicio.InicioDeSesion.IniciarSesionAsync(correo, contrasenia);        
         if (token == null)
-            return false;
+            return false;        
+        else
+            _servicio.Configuracion.ColocarToken(token);
 
         return true;
     }
