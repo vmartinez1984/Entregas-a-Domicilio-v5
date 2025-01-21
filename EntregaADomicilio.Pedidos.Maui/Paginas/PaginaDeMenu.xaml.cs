@@ -27,43 +27,19 @@ public partial class PaginaDeMenu : ContentPage
         foreach (var item in categorias)
         {
             item.Url = _servicio.Configuracion.ObtenerUrl($"Categorias/{item.Id}/Imagen");
-        }
-        ListView.ItemsSource = categorias;
-        //ConstruirElGrid(await _servicio.Categoria.ObtenerTodosAsync());
+            item.Url = "https://file.adomicil.io/luckysushi.tr3sco.net/_files/images/product/entrada-edamame-vapor-010119-0492943390036441-0464231620293218.png";
+        }        
+        CollectionView.ItemsSource = categorias;        
         // Detener la animación del ActivityIndicator        
         this.ActivityIndicator.IsVisible = false;
     }
 
-    private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+    private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         CategoriaDto categoria;
 
-        categoria = (CategoriaDto)e.Item;
-        Navigation.PushAsync(new PaginaDeCategoria(_servicio) { BindingContext = categoria }, true);
-    }
-
-    //private void ConstruirElGrid(List<CategoriaDto> categorias)
-    //{
-    //    this.Grid = new Grid
-    //    {
-    //        Padding = 10,
-    //        ColumnDefinitions =
-    //        {
-    //            new ColumnDefinition{Width = GridLength.Auto},
-    //            new ColumnDefinition{Width = GridLength.Auto}
-    //        }
-    //    };
-
-    //    for (int i = 0; i < categorias.Count; i++)
-    //    {
-    //        this.Grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-    //    }
-
-    //    for (int i = 0; i < categorias.Count; i = i + 2)
-    //    {
-    //        var categoria = categorias[i];
-    //        this.Grid.Add(new Label { Text = categoria.Nombre }, 0, i);
-    //        this.Grid.Add(new Label { Text = categoria.Nombre }, 1, i);
-    //    }
-    //}
+        categoria = e.CurrentSelection.FirstOrDefault() as CategoriaDto;
+        if (categoria != null)
+            Navigation.PushAsync(new PaginaDeCategoria(_servicio) { BindingContext = categoria }, true);
+    }   
 }

@@ -2,35 +2,39 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EntregaADomicilio.Pedidos.Maui.Paginas.PaginaDeBusqueda"
-             Title="PaginaDeBusqueda">
-    <VerticalStackLayout>
-        <Label 
-            Text="Busca por nombre o ingrediente"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        
-        <SearchBar Placeholder="Buscar por nombre o ingrediente" />
+             Title="Buscar">
+    <ScrollView>
+        <StackLayout>
+            <Label Text="Busca por nombre o ingrediente" VerticalOptions="Center"  HorizontalOptions="Center" />
 
-        <ListView>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="2*"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Label Text="{Binding Nombre}"/>
-                        <Label Text="{Binding Descripcion}" Grid.Row="1"/>
-                        <Label Text="{Binding Precio}" Grid.Row="2"/>
-                        <Image Source="{Binding Url}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"/>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </VerticalStackLayout>
+            <SearchBar Placeholder="Buscar por nombre o ingrediente" x:Name="SearchBar" TextChanged="SearchBar_TextChanged"  />
+
+            <ActivityIndicator x:Name="ActivityIndicator"/>
+
+            <CollectionView x:Name="CollectionView" SelectionChanged="CollectionView_SelectionChanged" SelectionMode="Single" ItemsLayout="VerticalGrid">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="10" BackgroundColor="LightGrey" Padding="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="{Binding Nombre}"/>
+                            <Label Text="{Binding Descripcion}" Grid.Row="1"/>
+                            <Label Text="{Binding Precio, StringFormat='{}{0:C2}'}" Grid.Row="2"/>
+
+                            <Image Source="{Binding EnlaceDeImagen}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" WidthRequest="150"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

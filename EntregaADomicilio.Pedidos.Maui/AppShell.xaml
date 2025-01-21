@@ -43,7 +43,7 @@
          ContentTemplate="{DataTemplate Pagina:PaginaDelCarrito}"
          FlyoutIcon="Ico.png"
          IsVisible="False"
-         Route="carrito"
+         x:Name="TabCarrito" FlyoutItemIsVisible="False"
         />
 
     </FlyoutItem>

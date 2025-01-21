@@ -27,5 +27,16 @@ namespace EntregaADomicilio.Pedidos.Maui.Servicios
                 return new List<PlatilloDto>();
 
         }
+
+        internal async Task<List<PlatilloDto>> ObtenerTodosAsync()
+        {
+            using var client = _httpClientFactory.CreateClient();
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, _url);
+            var response = await client.SendAsync(httpRequest);
+            if (response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<List<PlatilloDto>>(await response.Content.ReadAsStringAsync());
+            else
+                return new List<PlatilloDto>();
+        }
     }
 }

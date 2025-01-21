@@ -26,10 +26,12 @@ public partial class PaginaDeCategoria : ContentPage
 
         categoria = (CategoriaDto)BindingContext;
         platillos = (List<PlatilloDto>)await _servicio.Platillo.ObtenerPorCategoriaIdAsync(categoria.Id);
-        platillos.ForEach(item => {
+        platillos.ForEach(item =>
+        {
             item.EnlaceDeImagen = _servicio.Configuracion.ObtenerUrl(item.EnlaceDeImagen);
+            item.EnlaceDeImagen = "https://file.adomicil.io/luckysushi.tr3sco.net/_files/images/product/kushiagues-platano-0550904447003689-0270853443663033.png";
         });
-        ListView.ItemsSource = platillos;
+        this.CollectionView.ItemsSource = platillos;
         // Detener la animación del ActivityIndicator        
         this.ActivityIndicator.IsVisible = false;
     }
@@ -37,10 +39,19 @@ public partial class PaginaDeCategoria : ContentPage
 
     private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
     {
-        Core.Dtos.Pedidos.PlatilloDto platilloDto;
+        PlatilloDto platilloDto;
 
-        platilloDto = (Core.Dtos.Pedidos.PlatilloDto)e.Item;
+        platilloDto = (PlatilloDto)e.Item;
         Navigation.PushAsync(new PaginaDePlatillo { BindingContext = platilloDto });
 
+    }
+
+    private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        PlatilloDto platillo;
+
+        platillo = e.CurrentSelection.FirstOrDefault() as PlatilloDto;
+        if (platillo != null)
+            Navigation.PushAsync(new PaginaDePlatillo { BindingContext = platillo });
     }
 }

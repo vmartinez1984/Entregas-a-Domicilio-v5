@@ -6,5 +6,15 @@
         {
             InitializeComponent();
         }
+
+        public void MostarTabDeCarrito()
+        {
+            TabCarrito.IsVisible = true;
+        }
+
+        public void OcultarTabDeCarrito()
+        {
+            TabCarrito.IsVisible = false;
+        }
     }
 }

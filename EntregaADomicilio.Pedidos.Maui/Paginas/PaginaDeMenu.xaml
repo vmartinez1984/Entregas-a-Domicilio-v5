@@ -2,29 +2,26 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EntregaADomicilio.Pedidos.Maui.Paginas.PaginaDeMenu"
-             Title="PaginaDeMenu">
+             Title="Menú">
     <VerticalStackLayout>
         <!--<Entry Placeholder="Buscar un platillo" x:Name="EntryDeBusqueda"/>-->
         <ActivityIndicator x:Name="ActivityIndicator" IsVisible="False" IsRunning="True"/>
-        <ListView x:Name="ListView" ItemTapped="ListView_ItemTapped">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
+        <CollectionView 
+            x:Name="CollectionView" SelectionChanged="CollectionView_SelectionChanged" SelectionMode="Single"
+            ItemsLayout="VerticalGrid,2"
+            >          
+            <CollectionView.ItemTemplate>
+                <DataTemplate>                    
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>                            
+                            </Grid.ColumnDefinitions>
                             <Image Source="{Binding Url}"  MaximumWidthRequest="100"/>
                             <Label Text="{Binding Nombre}" Grid.Column="1" VerticalOptions="StartAndExpand"/>
-                        </Grid>
-                    </ViewCell>
+                        </Grid>                    
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <!--<Grid x:Name="Grid">
-            <Grid.RowDefinitions></Grid.RowDefinitions>
-            <Label/>
-        </Grid>-->
+            </CollectionView.ItemTemplate>
+        </CollectionView>        
     </VerticalStackLayout>
 </ContentPage>
