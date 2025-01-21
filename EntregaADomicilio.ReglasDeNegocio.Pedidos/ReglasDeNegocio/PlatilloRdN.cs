@@ -1,33 +1,52 @@
 ﻿using AutoMapper;
-using EntregaADomicilio.Pedidos.Dtos;
 using EntregaADomicilio.Core.Entidades;
 using EntregaADomicilio.Core.Interfaces.Repositorios;
+using EntregaADomicilio.Core.Dtos.Pedidos;
+using EntregaADomicilio.Core.Interfaces.Almacenes;
 
 namespace EntregaADomicilio.Pedidos.ReglasDeNegocio
 {
-    public class PlatilloRdN: BaseRdN
+    public class PlatilloRdN : BaseRdN
     {
-        //private readonly IAlmacenDeArchivos _almacenDeArchivos;
+        private readonly IAlmacenDeArchivos _almacenDeArchivos;
 
         public PlatilloRdN(
-            IRepositorio repositorio, 
-            IMapper mapper
-            //IAlmacenDeArchivos almacenDeArchivos
+            IRepositorio repositorio,
+            IMapper mapper,
+            IAlmacenDeArchivos almacenDeArchivos
         ) : base(repositorio, mapper)
         {
-            //_almacenDeArchivos = almacenDeArchivos;
+            _almacenDeArchivos = almacenDeArchivos;
         }
-       
-        public Task<byte[]> ObtenerImagenPorIdAsync(string platilloId)
+
+        /// <summary>
+        /// Buscar por nombre o ingredientes
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <returns></returns>
+        public async Task<PlatilloDto> BuscarAsync(string nombre)
         {
-            throw new NotImplementedException();
+            Platillo platillo;
+
+            platillo = await _repositorio.Platillo.BuscarAsync(nombre);
+
+            return platillo.ToDto();
+        }
+
+        public async Task<byte[]> ObtenerImagenPorIdAsync(string platilloId)
+        {
+            Platillo platillo;
+
+            platillo = await _repositorio.Platillo.ObtenerPorIdAsync(platilloId);
+
+            return await _almacenDeArchivos.ObtenerBytes(platillo.Archivo.RutaDelArchivo);
         }
 
         public async Task<List<PlatilloDto>> ObtenerPorCategoriaIdAsync(string categoria)
         {
             List<PlatilloDto> dtos;
             List<Platillo> entidadades;
-            
+
             entidadades = await _repositorio.Platillo.ObtenerTodosPorCategoriaIdAsync(categoria);
             dtos = _mapper.Map<List<PlatilloDto>>(entidadades);
 

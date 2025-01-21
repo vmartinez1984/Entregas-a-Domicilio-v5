@@ -37,6 +37,11 @@ namespace EntregaADomicilio.Administracion.Api.Controllers
             return Ok(categoria);
         }
 
+        /// <summary>
+        /// Agregar categoria
+        /// </summary>
+        /// <param name="categoria"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> AgregarAsync(CategoriaDtoIn categoria)
         {
@@ -51,6 +56,20 @@ namespace EntregaADomicilio.Administracion.Api.Controllers
             id = await _reglasDeNegocio.Categoria.AgregarAsync(categoria);
 
             return Created($"Categorias/{id.Id}", id);
+        }
+
+        /// <summary>
+        /// Obtiene la imagen de la categoria por id
+        /// </summary>
+        /// <param name="categoriaId"></param>        
+        [HttpGet("{categoriaId}/Imagen")]
+        public async Task<IActionResult> ObtenerImagenPorIdAsync(string categoriaId)
+        {
+            byte[] bytes;
+
+            bytes = await _reglasDeNegocio.Categoria.ObtenerImagenPorIdAsync(categoriaId);
+
+            return File(bytes, "image/png");
         }
 
         [HttpPut("{categoriaId}")]

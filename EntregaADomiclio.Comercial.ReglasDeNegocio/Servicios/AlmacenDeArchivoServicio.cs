@@ -19,5 +19,10 @@ namespace EntregaADomiclio.Comercial.ReglasDeNegocio.Servicios
         {
             throw new NotImplementedException();
         }
+
+        public Task<byte[]> ObtenerBytes(string ruta)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

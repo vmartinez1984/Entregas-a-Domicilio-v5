@@ -1,4 +1,4 @@
-﻿namespace EntregaADomicilio.Core.Repartidores.Dtos
+﻿namespace EntregaADomicilio.Core.Dtos
 {
     public class TokenDto
     {

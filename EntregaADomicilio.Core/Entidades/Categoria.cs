@@ -18,5 +18,6 @@ namespace EntregaADomicilio.Core.Entidades
         public bool EstaActivo { get; set; } = true;
 
         public DateTime FechaDeRegistro { get; set; } = DateTime.Now;
+        public Archivo Archivo { get; set; }
     }
 }

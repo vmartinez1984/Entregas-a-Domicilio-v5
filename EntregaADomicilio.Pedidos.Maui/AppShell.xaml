@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="EntregaADomicilio.Pedidos.Maui.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:EntregaADomicilio.Pedidos.Maui"
+    xmlns:Pagina="clr-namespace:EntregaADomicilio.Pedidos.Maui.Paginas"    
+     FlyoutBehavior="Disabled"
+    Title="Entregas a domicilio"    
+    >   
+    <FlyoutItem>
+        <ShellContent
+        Title="Menu"
+        ContentTemplate="{DataTemplate Pagina:PaginaDeMenu}"
+        FlyoutIcon="Ico.png"
+        />
+
+        <ShellContent
+        Title="Buscar"
+        ContentTemplate="{DataTemplate Pagina:PaginaDeBusqueda}"
+        FlyoutIcon="Ico.png"
+        />
+
+        <ShellContent
+        Title="Inicio"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+        <ShellContent
+         Title="Sucursales"
+         ContentTemplate="{DataTemplate Pagina:PaginaDeSucursales}"
+         FlyoutIcon="Ico.png"
+         />
+
+        <ShellContent
+         Title="Mi cuenta"
+         ContentTemplate="{DataTemplate Pagina:PaginaDePerfil}"
+         FlyoutIcon="Ico.png"
+         />
+
+        <ShellContent
+         Title="Carrito"
+         ContentTemplate="{DataTemplate Pagina:PaginaDelCarrito}"
+         FlyoutIcon="Ico.png"
+         IsVisible="False"
+         Route="carrito"
+        />
+
+    </FlyoutItem>
+
+</Shell>

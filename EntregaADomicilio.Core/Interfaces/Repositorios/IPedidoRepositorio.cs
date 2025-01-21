@@ -6,6 +6,7 @@ namespace EntregaADomicilio.Core.Interfaces.Repositorios
     {
         Task ActualizarAsync(Pedido pedido);
         Task<int> AgregarAsync(Pedido pedido);
+        Task<List<Pedido>> ObtenerPedidosPorEstadoYRepartidorId(string repartidorId, string estado);
         Task<List<Pedido>> ObtenerPedidosPreparadoAsync();
         Task<Pedido> ObtenerPorIdAsync(string pedidoId);
         Task<List<Pedido>> ObtenerTodosPorClienteIdAsync(string clienteId);

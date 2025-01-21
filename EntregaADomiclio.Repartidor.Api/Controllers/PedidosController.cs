@@ -1,5 +1,4 @@
 ﻿using EntregaADomicilio.Core.Repartidores.Dtos;
-using EntregaADomicilio.Repartidores.Dtos;
 using EntregaADomicilio.Repartidores.ReglasDeNegocio;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -30,9 +29,10 @@ namespace EntregaADomicilio.Repartidor.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> ObtenerAsync()
         {
-            List<PedidoDto> pedido;            
+            List<PedidoDto> pedido;
 
-            pedido = await _reglasDeNegocio.Repartidor.ObtenerAsync(ObtenerId());
+            pedido = await _reglasDeNegocio.Pedido.ObtenerAsync();
+            this.HttpContext.Response.Headers.Add("Total", pedido.Count.ToString());
 
             return Ok(pedido);
         }
@@ -45,22 +45,37 @@ namespace EntregaADomicilio.Repartidor.Api.Controllers
         [HttpPost("{pedidoId}/Entregado")]
         public async Task<IActionResult> PedidoEntregadoAsync(string pedidoId)
         {
-            await _reglasDeNegocio.Repartidor.PedidoEntregadoAsync(pedidoId);
+            await _reglasDeNegocio.Pedido.PedidoEntregadoAsync(pedidoId);
 
             return Accepted();
         }
 
         /// <summary>
-        /// ACeptar pedido
+        /// Aceptar pedido
         /// </summary>
         /// <param name="pedidoId"></param>
         /// <returns></returns>
         [HttpPost("{pedidoId}/Aceptar")]
         public async Task<IActionResult> AceptarPedidoAsync(string pedidoId)
         {
-            await _reglasDeNegocio.Repartidor.AceptarPedidoAsync(ObtenerId(), pedidoId);
+            await _reglasDeNegocio.Pedido.AceptarPedidoAsync(ObtenerId(), pedidoId);
 
             return Accepted();
-        }      
+        }
+
+        /// <summary>
+        /// Pedidos que lleva en camino el repartidor
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("EnCamino")]
+        public async Task<IActionResult> ObtenerPedidosEnCaminoAsync()
+        {
+            List<PedidoDto> pedidoDtos;
+
+            pedidoDtos = await _reglasDeNegocio.Pedido.ObtenerPedidosEnCaminoAsync(ObtenerId());
+            this.HttpContext.Response.Headers.Add("Total", pedidoDtos.Count.ToString());
+
+            return Ok(pedidoDtos);
+        }
     }
 }

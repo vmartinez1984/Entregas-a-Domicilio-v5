@@ -1,4 +1,5 @@
-﻿using EntregaADomicilio.Core.Repartidores.Dtos;
+﻿using EntregaADomicilio.Core.Dtos;
+using EntregaADomicilio.Core.Repartidores.Dtos;
 using EntregaADomicilio.Repartidores.ReglasDeNegocio;
 using Microsoft.AspNetCore.Mvc;
 

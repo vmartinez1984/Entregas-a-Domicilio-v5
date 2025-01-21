@@ -30,6 +30,11 @@ namespace EntregaADomicilio.Repositorios.Repo
             return item.Id;
         }
 
+        public async Task<Platillo> BuscarAsync(string nombre)
+            =>
+        await _collection.Find(x => x.Nombre.Contains(nombre) || x.Descripcion.Contains(nombre))
+                .FirstOrDefaultAsync();
+
         public async Task<int> ObtenerId()
         {
             var item = await
@@ -59,7 +64,7 @@ namespace EntregaADomicilio.Repositorios.Repo
 
         public async Task<List<Platillo>> ObtenerTodosAsync() => (await _collection.FindAsync(_ => true)).ToList();
 
-        public async Task<List<Platillo>> ObtenerTodosPorCategoriaIdAsync(string categoria) =>   
+        public async Task<List<Platillo>> ObtenerTodosPorCategoriaIdAsync(string categoria) =>
             (await _collection.FindAsync(x => x.Categoria == categoria)).ToList();
 
     }//end class}

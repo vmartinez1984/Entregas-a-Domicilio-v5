@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EntregaADomicilio.Pedidos.Maui.Paginas.PaginaDeBusqueda"
+             Title="PaginaDeBusqueda">
+    <VerticalStackLayout>
+        <Label 
+            Text="Busca por nombre o ingrediente"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        
+        <SearchBar Placeholder="Buscar por nombre o ingrediente" />
+
+        <ListView>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="{Binding Nombre}"/>
+                        <Label Text="{Binding Descripcion}" Grid.Row="1"/>
+                        <Label Text="{Binding Precio}" Grid.Row="2"/>
+                        <Image Source="{Binding Url}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>

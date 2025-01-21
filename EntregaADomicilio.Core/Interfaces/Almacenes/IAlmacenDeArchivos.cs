@@ -6,7 +6,7 @@ namespace EntregaADomicilio.Core.Interfaces.Almacenes
     {
         Task<string> Guardar(string bucketName, string nombreDelArchivo, IFormFile formFile);
 
-        Task<byte[]> ObtenerBytes(string contenedor, string nombreDelArchivo);
+        Task<byte[]> ObtenerBytes(string ruta);
 
         Task Borrar(string ruta, string contenedor);
     }

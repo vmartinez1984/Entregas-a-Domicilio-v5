@@ -14,6 +14,7 @@ namespace EntregaADomicilio.Repartidores.Ayudantes
             services.AddScoped<UnitOfWork>();
             services.AddScoped<RepartidorRdN>();      
             services.AddScoped<UbicacionRdN>();
+            services.AddScoped<PedidoRdN>();
 
             var mapperConfig = new MapperConfiguration(mapperConfig =>
             {

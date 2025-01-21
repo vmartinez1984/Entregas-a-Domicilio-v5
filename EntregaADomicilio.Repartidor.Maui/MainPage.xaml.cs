@@ -1,11 +1,12 @@
-﻿using EntregaADomicilio.Repartidor.Maui.Servicios;
+﻿using EntregaADomicilio.Core.Repartidores.Dtos;
+using EntregaADomicilio.Repartidor.Maui.Paginas;
+using EntregaADomicilio.Repartidor.Maui.Servicios;
 
 namespace EntregaADomicilio.Repartidor.Maui
 {
     public partial class MainPage : ContentPage
     {
         private readonly Servicio _servicio;
-        int count = 0;
 
         public MainPage(Servicio servicio)
         {
@@ -26,6 +27,14 @@ namespace EntregaADomicilio.Repartidor.Maui
             this.ActivityIndicator.IsVisible = false;
         }
 
+        /// <summary>
+        /// Mostar en otra page los detalles
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            Navigation.PushAsync(new PaginaDeDetalleDelPedido(_servicio) { BindingContext = e.Item as PedidoDto});
+        }
     }
-
 }

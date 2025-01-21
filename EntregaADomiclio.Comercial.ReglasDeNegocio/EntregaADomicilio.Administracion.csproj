@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EntregaADomicilio.Core\EntregaADomicilio.Core.csproj" />
     <ProjectReference Include="..\EntregaADomicilio.Repositorios\EntregaADomicilio.Repositorios.csproj" />
+    <ProjectReference Include="..\EntregasADomiclio.StoreFilesLocal\EntregasADomicilio.StoreFiles.csproj" />
     <ProjectReference Include="..\JwtTokenServicio\JwtTokenServicio.csproj" />
   </ItemGroup>
 

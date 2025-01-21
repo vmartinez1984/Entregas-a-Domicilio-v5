@@ -1,14 +1,29 @@
 ﻿using AutoMapper;
+using EntregaADomicilio.Core.Dtos.Pedidos;
 using EntregaADomicilio.Core.Entidades;
+using EntregaADomicilio.Core.Interfaces.Almacenes;
 using EntregaADomicilio.Core.Interfaces.Repositorios;
-using EntregaADomicilio.Pedidos.Dtos;
 
 namespace EntregaADomicilio.Pedidos.ReglasDeNegocio
 {
     public class CategoriaRdN : BaseRdN
     {
-        public CategoriaRdN(IRepositorio repositorio, IMapper mapper) : base(repositorio, mapper)
+        private readonly IAlmacenDeArchivos almacenDeArchivos;
+
+        public CategoriaRdN(IRepositorio repositorio, IMapper mapper, IAlmacenDeArchivos almacenDeArchivos) : base(repositorio, mapper)
         {
+            this.almacenDeArchivos = almacenDeArchivos;
+        }
+
+        public async Task<byte[]> ObtenerImagenPorIdAsync(string categoriaId)
+        {
+            Categoria categoria;
+            byte[] bytes;
+
+            categoria = await _repositorio.Categoria.ObtenerPorIdAsync(categoriaId);
+            bytes = await almacenDeArchivos.ObtenerBytes(categoria.Archivo.RutaDelArchivo);
+
+            return bytes;
         }
 
         public async Task<CategoriaDto> ObtenerPorIdAsync(string categoriaId)

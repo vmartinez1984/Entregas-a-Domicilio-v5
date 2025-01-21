@@ -32,8 +32,7 @@ namespace EntregaADomicilio.Core.Dtos.Administracion
 
         [Required]
         public decimal Precio { get; set; }
-
-        //[Required]
+                
         public IFormFile FormFile { get; set; }
 
         [Required]

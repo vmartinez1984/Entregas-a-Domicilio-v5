@@ -38,6 +38,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App Mobile", "App Mobile", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntregaADomicilio.Repartidor.Maui", "EntregaADomicilio.Repartidor.Maui\EntregaADomicilio.Repartidor.Maui.csproj", "{86EA6A13-AFCC-4079-8BD5-7DC7AB6A24C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntregaADomicilio.Pedidos.Maui", "EntregaADomicilio.Pedidos.Maui\EntregaADomicilio.Pedidos.Maui.csproj", "{E7E937A7-18AF-41C1-B57F-7777D684D4F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntregasADomicilio.StoreFiles", "EntregasADomiclio.StoreFilesLocal\EntregasADomicilio.StoreFiles.csproj", "{9751E146-52F4-4993-96A8-C6EBCFD498AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -94,6 +98,16 @@ Global
 		{86EA6A13-AFCC-4079-8BD5-7DC7AB6A24C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86EA6A13-AFCC-4079-8BD5-7DC7AB6A24C7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{86EA6A13-AFCC-4079-8BD5-7DC7AB6A24C7}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E7E937A7-18AF-41C1-B57F-7777D684D4F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7E937A7-18AF-41C1-B57F-7777D684D4F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7E937A7-18AF-41C1-B57F-7777D684D4F8}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E7E937A7-18AF-41C1-B57F-7777D684D4F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7E937A7-18AF-41C1-B57F-7777D684D4F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7E937A7-18AF-41C1-B57F-7777D684D4F8}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{9751E146-52F4-4993-96A8-C6EBCFD498AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9751E146-52F4-4993-96A8-C6EBCFD498AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9751E146-52F4-4993-96A8-C6EBCFD498AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9751E146-52F4-4993-96A8-C6EBCFD498AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -106,5 +120,6 @@ Global
 		{AA615DBA-E52D-4CC1-B391-7EA113DBD275} = {123BF26A-1300-45B6-8962-5683F5E5717C}
 		{E18A06DD-CD80-499A-8B1F-A5C2637C4D0A} = {123BF26A-1300-45B6-8962-5683F5E5717C}
 		{86EA6A13-AFCC-4079-8BD5-7DC7AB6A24C7} = {E18A06DD-CD80-499A-8B1F-A5C2637C4D0A}
+		{E7E937A7-18AF-41C1-B57F-7777D684D4F8} = {E18A06DD-CD80-499A-8B1F-A5C2637C4D0A}
 	EndGlobalSection
 EndGlobal

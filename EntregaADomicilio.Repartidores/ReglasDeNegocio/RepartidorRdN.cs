@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
-using EntregaADomicilio.Core.Constantes;
+using EntregaADomicilio.Core.Dtos;
 using EntregaADomicilio.Core.Entidades;
 using EntregaADomicilio.Core.Interfaces.Repositorios;
 using EntregaADomicilio.Core.Repartidores.Dtos;
-using EntregaADomicilio.Repartidores.Dtos;
 using JwtTokenServicio.Servicios;
 
 namespace EntregaADomicilio.Repartidores.ReglasDeNegocio
@@ -21,19 +20,6 @@ namespace EntregaADomicilio.Repartidores.ReglasDeNegocio
             _jwtToken = jwtToken;
         }
 
-        public async Task AceptarPedidoAsync(string repartidorID, string pedidoId)
-        {
-            Pedido pedido;
-
-            pedido = await _repositorio.Pedido.ObtenerPorIdAsync(pedidoId);
-            pedido.RepartidorId = repartidorID;
-            pedido.Estado = EstadoDelPedido.EnCamino;
-            pedido.Estados.Add(EstadoDelPedido.EnCamino, DateTime.Now);
-            pedido.FechaDeActualizacion = DateTime.Now;
-
-            await _repositorio.Pedido.ActualizarAsync(pedido);
-        }
-
         public async Task<TokenDto> IniciarSesionAsync(InicioDeSesionDto inicioDeSesion)
         {
             Persona persona;
@@ -46,27 +32,7 @@ namespace EntregaADomicilio.Repartidores.ReglasDeNegocio
             else
                 return null;
         }
-
-        public async Task<List<PedidoDto>> ObtenerAsync(string repartidorId)
-        {
-            List<Pedido> pedido;
-
-            pedido = await _repositorio.Pedido.ObtenerPedidosPreparadoAsync();
-
-            return _mapper.Map<List<PedidoDto>>(pedido);
-        }
-
-        public async Task PedidoEntregadoAsync(string pedidoId)
-        {
-            Pedido pedido;
-
-            pedido = await _repositorio.Pedido.ObtenerPorIdAsync(pedidoId);
-            pedido.Estado = "Entregado";
-            pedido.FechaDeActualizacion = DateTime.Now;
-
-            await _repositorio.Pedido.ActualizarAsync(pedido);
-        }
-
+              
         private bool EsValidaLaContrasenia(string contrasenia1, string contrasenia2)
         {
             //En teoria la contrasenia1 esta encriptada, entonces se tendria que hacer el debido proceso, pero por practicidad se hara plano

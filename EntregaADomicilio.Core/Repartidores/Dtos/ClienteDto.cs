@@ -22,5 +22,7 @@
         public string Estado { get; set; }
 
         public string CodigoPostal { get; set; }
+        
+        public string Direccion { get {  return $"{CalleYNumero}, {Colonia}"; } }
     }
 }

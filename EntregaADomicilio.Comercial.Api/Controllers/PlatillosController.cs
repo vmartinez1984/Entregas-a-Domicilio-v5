@@ -1,4 +1,4 @@
-﻿using EntregaADomicilio.Pedidos.Dtos;
+﻿using EntregaADomicilio.Core.Dtos.Pedidos;
 using EntregaADomicilio.Pedidos.ReglasDeNegocio;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +27,23 @@ namespace EntregaADomicilio.Comercial.Api.Controllers
         public async Task<IActionResult> ObtenerTodos() => Ok(await _reglasDeNegocio.Platillo.ObtenerTodosAsync());
 
         /// <summary>
+        /// Buscar por nombre o ingrediente
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <returns></returns>
+        [HttpGet("{nombre}/Buscar")]
+        public async Task<IActionResult> Buscar(string nombre)
+        {
+            PlatilloDto platillo;
+
+            platillo = await _reglasDeNegocio.Platillo.BuscarAsync(nombre);
+            if (platillo == null) 
+                return NotFound();
+
+            return Ok(platillo);
+        }
+
+        /// <summary>
         /// Lista de platillos por categoria
         /// </summary>
         /// <param name="categoriaId"></param>
@@ -39,8 +56,11 @@ namespace EntregaADomicilio.Comercial.Api.Controllers
             categoria = await _reglasDeNegocio.Categoria.ObtenerPorIdAsync(categoriaId);
              if(categoria == null)
                 return NotFound(new { Mensanje = "No se encontro la categoria" });
+            var lista = await _reglasDeNegocio.Platillo.ObtenerPorCategoriaIdAsync(categoria.Nombre);
+            foreach (var item in lista)            
+                item.EnlaceDeImagen = $"/api/Platillos/{item.Id}/Imagen";           
 
-            return Ok(await _reglasDeNegocio.Platillo.ObtenerPorCategoriaIdAsync(categoria.Nombre));
+            return Ok(lista);
         }
 
         /// <summary>

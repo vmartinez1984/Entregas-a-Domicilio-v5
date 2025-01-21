@@ -1,4 +1,4 @@
-using EntregaADomicilio.Core.Repartidores.Dtos;
+using EntregaADomicilio.Core.Dtos;
 using EntregaADomicilio.Repartidor.Maui.Servicios;
 
 namespace EntregaADomicilio.Repartidor.Maui.Paginas;
@@ -24,7 +24,7 @@ public partial class PaginaDeInicioDeSesion : ContentPage
             }
             else
             {
-                
+                LabelMensaje.Text = "Usuario y/o contraseña incorrecta(s)";
             }
         }
         HabilitarFormulario(true);

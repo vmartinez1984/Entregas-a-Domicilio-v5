@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace EntregaADomicilio.Core.Dtos.Administracion
 {
@@ -22,6 +23,8 @@ namespace EntregaADomicilio.Core.Dtos.Administracion
         [Required]
         [MaxLength(50)]
         public string EncodedKey { get; set; }
+
+        public IFormFile FormFile { get; set; }
     }
 
     public class CategoriaDtoUpd
@@ -31,5 +34,7 @@ namespace EntregaADomicilio.Core.Dtos.Administracion
         public string Nombre { get; set; }
 
         public bool EstaActivo { get; set; }
+
+        public IFormFile FormFile { get; set; }
     }
 }

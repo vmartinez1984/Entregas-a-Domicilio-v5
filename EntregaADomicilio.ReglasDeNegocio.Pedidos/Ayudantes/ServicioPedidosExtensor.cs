@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using EntregaADomicilio.Core.Interfaces.Almacenes;
 using EntregaADomicilio.Pedidos.ReglasDeNegocio;
 using EntregaADomicilio.Repositorios.Ayudantes;
+using EntregasADomicilio.StoreFiles;
 using JwtTokenServicio.Helpers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +18,7 @@ namespace EntregaADomicilio.Pedidos.Ayudantes
             services.AddScoped<ClienteRdN>();
             services.AddScoped<PlatilloRdN>();
             services.AddScoped<PedidoRdN>();
-            //services.AddScoped<IAlmacenDeArchivos>();
+            services.AddScoped<IAlmacenDeArchivos, AlmacenDeArchivosFirebase>();
 
             var mapperConfig = new MapperConfiguration(mapperConfig =>
             {

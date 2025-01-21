@@ -1,14 +1,17 @@
 ﻿using AutoMapper;
 using EntregaADomicilio.Core.Dtos.Administracion;
 using EntregaADomicilio.Core.Entidades;
+using EntregaADomicilio.Core.Interfaces.Almacenes;
 using EntregaADomicilio.Core.Interfaces.Repositorios;
 
 namespace EntregaADomiclio.Administracion.ReglasDeNegocio
 {
     public class CategoriaRdN : BaseRdN
     {
-        public CategoriaRdN(IRepositorio repositorio, IMapper mapper) : base(repositorio, mapper)
+        private readonly IAlmacenDeArchivos _almacenDeArchivos;
+        public CategoriaRdN(IRepositorio repositorio, IMapper mapper, IAlmacenDeArchivos almacenDeArchivos) : base(repositorio, mapper)
         {
+            _almacenDeArchivos = almacenDeArchivos;
         }
 
         public async Task ActualizarAsync(string categoriaId, CategoriaDtoUpd categoriaDtoIn)
@@ -27,6 +30,8 @@ namespace EntregaADomiclio.Administracion.ReglasDeNegocio
             IdDto id;
 
             entidad = _mapper.Map<Categoria>(categoria);
+            if (categoria.FormFile != null)
+                entidad.Archivo = await GuardarEnAlmacenAsync(categoria);
             id = new IdDto
             {
                 Id = await _repositorio.Categoria.AgregarAsync(entidad),
@@ -34,6 +39,25 @@ namespace EntregaADomiclio.Administracion.ReglasDeNegocio
             };
 
             return id;
+        }
+
+        private async Task<Archivo> GuardarEnAlmacenAsync(CategoriaDtoIn platillo)
+        {
+            string aliasDelArchivo;
+            string respuesta;
+            Archivo archivo;
+
+            aliasDelArchivo = $"{platillo.EncodedKey}{Path.GetExtension(platillo.FormFile.FileName)}";
+            respuesta = await _almacenDeArchivos.Guardar("Categorias", aliasDelArchivo, platillo.FormFile);
+            archivo = new Archivo
+            {
+                AliasDelArchivo = aliasDelArchivo,
+                ContentType = platillo.FormFile.ContentType,
+                NombreDelArchivo = platillo.FormFile.FileName,
+                RutaDelArchivo = respuesta
+            };
+
+            return archivo;
         }
 
         public async Task BorrarAsync(string categoriaId)
@@ -70,5 +94,15 @@ namespace EntregaADomiclio.Administracion.ReglasDeNegocio
 
             return dtos;
         }
+
+        public async Task<byte[]> ObtenerImagenPorIdAsync(string categoriaId)
+        {
+            Categoria categoria;
+
+            categoria = await _repositorio.Categoria.ObtenerPorIdAsync(categoriaId);
+
+            return await _almacenDeArchivos.ObtenerBytes(categoria.Archivo.RutaDelArchivo);
+        }
+
     }
 }

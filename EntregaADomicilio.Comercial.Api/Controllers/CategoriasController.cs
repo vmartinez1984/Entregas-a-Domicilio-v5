@@ -1,4 +1,4 @@
-﻿using EntregaADomicilio.Pedidos.Dtos;
+﻿using EntregaADomicilio.Core.Dtos.Pedidos;
 using EntregaADomicilio.Pedidos.ReglasDeNegocio;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,6 +31,20 @@ namespace EntregaADomicilio.Comercial.Api.Controllers
             categorias = await _reglasDeNegocio.Categoria.ObtenerTodosAsync();            
 
             return Ok(categorias);
+        }
+
+        /// <summary>
+        /// Obtiene la imagen de la categoria por id
+        /// </summary>
+        /// <param name="categoriaId"></param>        
+        [HttpGet("{categoriaId}/Imagen")]
+        public async Task<IActionResult> ObtenerImagenPorPlatilloId(string categoriaId)
+        {
+            byte[] bytes;
+
+            bytes = await _reglasDeNegocio.Categoria.ObtenerImagenPorIdAsync(categoriaId);
+
+            return File(bytes, "image/png");
         }
     }
 }

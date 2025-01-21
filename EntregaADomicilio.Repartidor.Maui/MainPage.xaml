@@ -8,7 +8,7 @@
             Padding="30,0"
             Spacing="25">
             <ActivityIndicator x:Name="ActivityIndicator" IsRunning="True" IsVisible="False"/>
-            <ListView x:Name="ListView">
+            <ListView x:Name="ListView" ItemTapped="ListView_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

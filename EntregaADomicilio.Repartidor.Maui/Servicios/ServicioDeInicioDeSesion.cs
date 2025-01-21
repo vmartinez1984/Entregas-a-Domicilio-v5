@@ -1,4 +1,5 @@
-﻿using EntregaADomicilio.Core.Repartidores.Dtos;
+﻿using EntregaADomicilio.Core.Dtos;
+using EntregaADomicilio.Core.Repartidores.Dtos;
 using Newtonsoft.Json;
 
 namespace EntregaADomicilio.Repartidor.Maui.Servicios

@@ -41,6 +41,13 @@ namespace EntregaADomicilio.Repositorios.Repo
             return item.Id + 1;
         }
 
+        public async Task<List<Pedido>> ObtenerPedidosPorEstadoYRepartidorId(string repartidorId, string estado)
+            =>
+         await _collection
+                .Find(x => x.RepartidorId == repartidorId && x.Estado == estado)
+                .SortByDescending(x => x.FechaDeRegistro)
+                .ToListAsync();
+
         public async Task<List<Pedido>> ObtenerPedidosPreparadoAsync() =>
             await _collection.Find(x => x.Estado == EstadoDelPedido.Preparado).ToListAsync();
 

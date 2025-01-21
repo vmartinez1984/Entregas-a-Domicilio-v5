@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EntregaADomicilio.Core.Dtos.Pedidos;
 using EntregaADomicilio.Core.Entidades;
 using EntregaADomicilio.Pedidos.Dtos;
 

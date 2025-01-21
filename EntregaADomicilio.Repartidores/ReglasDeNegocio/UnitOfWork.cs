@@ -6,13 +6,17 @@
 
         public UbicacionRdN Ubicacion { get; }
 
+        public PedidoRdN Pedido { get; }
+
         public UnitOfWork(
             RepartidorRdN repartidorRdN,
-            UbicacionRdN ubicacionRdN
+            UbicacionRdN ubicacionRdN,
+            PedidoRdN pedidoRdN
         )
         {
             Repartidor = repartidorRdN;
             Ubicacion = ubicacionRdN;
+            Pedido = pedidoRdN;
         }
     }
 }
