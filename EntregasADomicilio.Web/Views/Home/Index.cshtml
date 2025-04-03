@@ -1,0 +1,48 @@
+﻿@using EntregasADomicilio.Web.Dtos;
+
+@model IEnumerable<ProductoDto>
+
+@{
+    ViewData["Title"] = "Index";
+    List<CategoriaDto> categorias = (List<CategoriaDto>)ViewBag.Categorias;
+}
+
+<h1>Entregas a domicilio</h1>
+
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        <a class="nav-link " href="/Home">Todos</a>
+    </li>
+    @foreach (var item in categorias)
+    {
+        <li class="nav-item">
+            <a class="nav-link " href="/Home?categoriaId=@item.Id">@item.Nombre</a>
+        </li>
+    }
+</ul>
+
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+
+            <div class="card m-1">
+                <div class="card-header">
+                    @item.Nombre
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-7">
+                            <img src="/Producto/@item.Id/Imagen" class="img-fluid"/>
+                        </div>
+                        <div class="col-5">
+                            @item.Descripcion
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+</div>

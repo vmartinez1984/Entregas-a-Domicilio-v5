@@ -67,7 +67,7 @@ namespace EntregaADomicilio.Administracion.Api.Controllers
             {
                 this.ModelState.AddModelError(nameof(PlatilloDtoIn.Categoria), "No existe la categoria");
 
-                return BadRequest();
+                return BadRequest(this.ModelState);
             }
 
             platilloDto = await _reglasDeNegocio.Platillo.ObtenerPorIdAsync(platillo.EncodedKey);

@@ -8,7 +8,7 @@ namespace EntregaADomicilio.Core.Interfaces.Repositorios
         Task<int> AgregarAsync(Platillo platillo);
         Task<Platillo> BuscarAsync(string nombre);
         Task<Platillo> ObtenerPorIdAsync(string platilloId);
-        Task<List<Platillo>> ObtenerTodosAsync();
-        Task<List<Platillo>> ObtenerTodosPorCategoriaIdAsync(string categoriaId);
+        Task<List<Platillo>> ObtenerTodosAsync(bool estaActivo = true);
+        Task<List<Platillo>> ObtenerTodosPorCategoriaIdAsync(string categoriaId, bool estaActivo = true);
     }
 }

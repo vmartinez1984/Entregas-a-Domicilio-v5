@@ -62,10 +62,11 @@ namespace EntregaADomicilio.Repositorios.Repo
             return entidad;
         }
 
-        public async Task<List<Platillo>> ObtenerTodosAsync() => (await _collection.FindAsync(_ => true)).ToList();
+        public async Task<List<Platillo>> ObtenerTodosAsync(bool estaActivo = true)
+            => (await _collection.FindAsync(x => x.EstaActivo == estaActivo)).ToList();
 
-        public async Task<List<Platillo>> ObtenerTodosPorCategoriaIdAsync(string categoria) =>
-            (await _collection.FindAsync(x => x.Categoria == categoria)).ToList();
+        public async Task<List<Platillo>> ObtenerTodosPorCategoriaIdAsync(string categoria, bool estaActivo = true)
+            => (await _collection.FindAsync(x => x.Categoria == categoria && x.EstaActivo == estaActivo)).ToList();
 
     }//end class}
 

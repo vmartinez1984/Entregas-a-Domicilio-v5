@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>    
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Servicios\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EntregaADomicilio.Repositorios\EntregaADomicilio.Repositorios.csproj" />
+    <ProjectReference Include="..\EntregasADomiclio.StoreFilesLocal\EntregasADomicilio.StoreFiles.csproj" />
+  </ItemGroup>
+
+</Project>
